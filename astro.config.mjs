@@ -12,10 +12,6 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-  // For GitHub Pages: Use 'docs' folder OR use GitHub Actions (commented out)
-  // Option 1: Build to 'docs' folder (uncomment the line below)
-  // outDir: 'docs',
-  
-  // Option 2: Use default 'dist' folder with GitHub Actions (recommended)
-  // Keep default 'dist' folder and use the GitHub Actions workflow
+  // Build to 'docs' folder for GitHub Pages branch deployment
+  outDir: 'docs',
 });

@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# docs - NOT ignored, we commit it for GitHub Pages
 *.local
 
 # Editor directories and files
@@ -29,7 +30,3 @@ dist-ssr
 # Environment variables
 .env
 .env.production
-
-# GitHub Pages - docs folder (if using docs folder method)
-# Uncomment the line below if you're using the 'docs' folder method
-# docs
