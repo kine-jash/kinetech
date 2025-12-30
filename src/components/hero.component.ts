@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-hero',
@@ -38,19 +39,19 @@ import { Component } from '@angular/core';
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up px-4" style="animation-delay: 0.3s;">
-            <a href="#cost-estimator" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-slate-900/20 duration-200">
+            <a (click)="navigateTo('cost-estimator')" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-slate-900/20 duration-200">
               Start Building
               <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            <a href="#products" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-slate-200 text-lg font-semibold rounded-full text-slate-700 bg-white hover:bg-slate-50 transition-all hover:scale-105 active:scale-95 hover:border-slate-300 shadow-sm hover:shadow-lg duration-200">
+            <a (click)="navigateTo('products')" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-slate-200 text-lg font-semibold rounded-full text-slate-700 bg-white hover:bg-slate-50 transition-all hover:scale-105 active:scale-95 hover:border-slate-300 shadow-sm hover:shadow-lg duration-200">
               View Solutions
             </a>
           </div>
 
           <!-- Scroll Indicator -->
-          <a href="#dashboard" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:text-kinetech-600 transition-colors p-2">
+          <a (click)="navigateTo('dashboard')" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:text-kinetech-600 transition-colors p-2">
             <span class="text-slate-400 text-sm font-medium mb-2 block">Our Platform</span>
             <svg class="w-6 h-6 text-slate-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -112,7 +113,7 @@ import { Component } from '@angular/core';
                 <div class="flex-1 p-6 md:p-8 overflow-y-auto bg-slate-50/50">
                    <div class="flex justify-between items-center mb-6">
                      <h3 class="text-xl font-bold text-slate-800">Your Active Products</h3>
-                     <button class="text-sm bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition shadow-sm hover:shadow active:scale-95 duration-200">Add Module</button>
+                     <button class="text-sm bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition shadow-sm hover:shadow active:scale-95 duration-200 cursor-pointer">Add Module</button>
                    </div>
 
                    <!-- Product Grid -->
@@ -180,4 +181,10 @@ import { Component } from '@angular/core';
     </div>
   `
 })
-export class HeroComponent {}
+export class HeroComponent {
+  private scrollService = inject(ScrollService);
+
+  navigateTo(section: string) {
+    this.scrollService.scrollToSection(section);
+  }
+}

@@ -1,0 +1,258 @@
+---
+// Chat Widget Component
+---
+
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
+  
+  <!-- Chat Window -->
+  <div id="chat-window" class="pointer-events-auto w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col mb-4 hidden" style="height: 500px;">
+      
+      <!-- Header -->
+      <div class="bg-slate-900 p-4 flex justify-between items-center text-white shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-kinetech-600 flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm">Kinetech AI</h3>
+            <div class="flex items-center gap-1">
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span class="text-xs text-slate-400">Online</span>
+            </div>
+          </div>
+        </div>
+        <button id="close-chat" class="text-slate-400 hover:text-white transition-colors cursor-pointer">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+        <div class="flex">
+          <div class="max-w-[85%] rounded-2xl rounded-bl-none px-4 py-3 text-sm shadow-sm bg-white text-slate-800">
+            Hello! I'm KineBot. How can I help you build your digital future today?
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="p-3 bg-white border-t border-slate-200 shrink-0">
+        <form id="chat-form" class="flex gap-2">
+          <input 
+            type="text" 
+            id="chat-input"
+            placeholder="Ask about our services..." 
+            class="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none text-sm"
+          >
+          <button 
+            type="submit" 
+            id="chat-submit"
+            class="w-10 h-10 bg-kinetech-600 text-white rounded-full flex items-center justify-center hover:bg-kinetech-700 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <svg class="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  <!-- Toggle Button -->
+  <button 
+    id="chat-toggle"
+    class="pointer-events-auto w-14 h-14 rounded-full bg-slate-900 text-white shadow-lg shadow-slate-900/30 flex items-center justify-center hover:scale-110 transition-transform duration-200 border-2 border-white cursor-pointer"
+  >
+    <svg id="chat-icon" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+    </svg>
+    <svg id="close-icon" class="w-7 h-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+</div>
+
+<script>
+  interface ChatMessage {
+    text: string;
+    isUser: boolean;
+    time: Date;
+  }
+
+  let messages: ChatMessage[] = [
+    { text: "Hello! I'm KineBot. How can I help you build your digital future today?", isUser: false, time: new Date() }
+  ];
+  let isLoading = false;
+  let chatSession: any = null;
+
+  function toggleChat() {
+    const chatWindow = document.getElementById('chat-window');
+    const chatIcon = document.getElementById('chat-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    if (chatWindow && chatIcon && closeIcon) {
+      const isOpen = !chatWindow.classList.contains('hidden');
+      if (isOpen) {
+        chatWindow.classList.add('hidden');
+        chatIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      } else {
+        chatWindow.classList.remove('hidden');
+        chatIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      }
+    }
+  }
+
+  function addMessage(text: string, isUser: boolean) {
+    messages.push({ text, isUser, time: new Date() });
+    renderMessages();
+    scrollToBottom();
+  }
+
+  function renderMessages() {
+    const container = document.getElementById('messages-container');
+    if (!container) return;
+
+    container.innerHTML = messages.map(msg => {
+      const alignment = msg.isUser ? 'justify-end' : 'justify-start';
+      const bgColor = msg.isUser ? 'bg-kinetech-600 text-white' : 'bg-white text-slate-800';
+      const borderRadius = msg.isUser ? 'rounded-br-none' : 'rounded-bl-none';
+      
+      return `
+        <div class="flex ${alignment}">
+          <div class="max-w-[85%] rounded-2xl ${borderRadius} px-4 py-3 text-sm shadow-sm ${bgColor}">
+            ${msg.text}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (isLoading) {
+      container.innerHTML += `
+        <div class="flex justify-start">
+          <div class="bg-white rounded-2xl rounded-bl-none px-4 py-3 shadow-sm border border-slate-100">
+            <div class="flex space-x-1">
+              <div class="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
+              <div class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+              <div class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  function scrollToBottom() {
+    const container = document.getElementById('messages-container');
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }
+
+  async function sendMessage(message: string) {
+    if (!message.trim() || isLoading) return;
+
+    addMessage(message, true);
+    isLoading = true;
+    renderMessages();
+
+    try {
+      const apiKey = import.meta.env.PUBLIC_GEMINI_API_KEY || '';
+      
+      if (!apiKey) {
+        throw new Error('API key not configured. Please set PUBLIC_GEMINI_API_KEY in your .env file.');
+      }
+
+      // Use fetch API to call Gemini REST API
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: message
+            }]
+          }],
+          systemInstruction: {
+            parts: [{
+              text: `You are 'KineBot', the intelligent assistant for Kinetech. 
+              Kinetech is a premier software development organization.
+              
+              Our Services:
+              1. Web Development: Custom, responsive, high-performance sites.
+              2. Cloud Solutions: Scalable AWS/Azure/GCP integration.
+              3. AI Integration: We build custom AI models for business efficiency.
+              
+              Our Key Feature: "Build Your Site at Your Cost" - a flexible pricing model where clients choose features to match their budget.
+              
+              Tone: Professional, minimalistic, helpful, and concise. Do not write long paragraphs. Use bullet points if helpful.`
+            }]
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+                   "I apologize, but I'm having trouble processing your request right now. Please try again later.";
+      
+      addMessage(text, false);
+    } catch (error) {
+      console.error('Error generating AI response:', error);
+      const errorMessage = error instanceof Error && error.message.includes('API key') 
+        ? "AI chat is not configured. Please set up your Gemini API key in the environment variables."
+        : "I apologize, but I'm having trouble connecting to the Kinetech network right now. Please try again later.";
+      addMessage(errorMessage, false);
+    } finally {
+      isLoading = false;
+      renderMessages();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('chat-toggle');
+    const closeBtn = document.getElementById('close-chat');
+    const form = document.getElementById('chat-form') as HTMLFormElement;
+    const input = document.getElementById('chat-input') as HTMLInputElement;
+    const submitBtn = document.getElementById('chat-submit');
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleChat);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', toggleChat);
+    }
+
+    if (form && input && submitBtn) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const message = input.value.trim();
+        if (message) {
+          input.value = '';
+          submitBtn.disabled = true;
+          await sendMessage(message);
+          submitBtn.disabled = false;
+        }
+      });
+
+      input.addEventListener('input', () => {
+        if (submitBtn) {
+          submitBtn.disabled = !input.value.trim() || isLoading;
+        }
+      });
+    }
+
+    renderMessages();
+  });
+</script>

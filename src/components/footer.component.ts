@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-footer',
@@ -18,26 +19,26 @@ import { Component } from '@angular/core';
           <div>
             <h4 class="text-white font-semibold mb-4">Company</h4>
             <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">About Us</a></li>
-              <li><a href="#" class="hover:text-white transition">Careers</a></li>
-              <li><a href="#" class="hover:text-white transition">Blog</a></li>
+              <li><a (click)="navigateTo('home')" class="hover:text-white transition cursor-pointer">About Us</a></li>
+              <li><a (click)="navigateTo('contact')" class="hover:text-white transition cursor-pointer">Careers</a></li>
+              <li><a (click)="navigateTo('products')" class="hover:text-white transition cursor-pointer">Blog</a></li>
             </ul>
           </div>
 
           <div>
             <h4 class="text-white font-semibold mb-4">Services</h4>
             <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">Web Development</a></li>
-              <li><a href="#" class="hover:text-white transition">AI Integration</a></li>
-              <li><a href="#" class="hover:text-white transition">Cloud Architecture</a></li>
+              <li><a (click)="navigateTo('services')" class="hover:text-white transition cursor-pointer">Web Development</a></li>
+              <li><a (click)="navigateTo('services')" class="hover:text-white transition cursor-pointer">AI Integration</a></li>
+              <li><a (click)="navigateTo('services')" class="hover:text-white transition cursor-pointer">Cloud Architecture</a></li>
             </ul>
           </div>
 
           <div>
             <h4 class="text-white font-semibold mb-4">Legal</h4>
             <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-              <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+              <li><a (click)="navigateTo('contact')" class="hover:text-white transition cursor-pointer">Privacy Policy</a></li>
+              <li><a (click)="navigateTo('contact')" class="hover:text-white transition cursor-pointer">Terms of Service</a></li>
             </ul>
           </div>
         </div>
@@ -55,4 +56,10 @@ import { Component } from '@angular/core';
     </footer>
   `
 })
-export class FooterComponent {}
+export class FooterComponent {
+  private scrollService = inject(ScrollService);
+
+  navigateTo(section: string) {
+    this.scrollService.scrollToSection(section);
+  }
+}

@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-header',
@@ -10,23 +11,23 @@ import { CommonModule } from '@angular/common';
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
           <!-- Logo -->
-          <a href="#home" (click)="closeMenu()" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+          <a (click)="navigateTo('home', $event)" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
             <div class="w-10 h-10 bg-gradient-to-br from-kinetech-500 to-kinetech-700 rounded-xl shadow-lg shadow-kinetech-500/20 flex items-center justify-center text-white font-display font-bold text-2xl transform group-hover:scale-105 transition-transform">K</div>
             <span class="font-display font-bold text-2xl tracking-tight text-slate-900 group-hover:text-kinetech-700 transition-colors">Kinetech</span>
           </a>
 
           <!-- Desktop Nav -->
           <nav class="hidden md:flex space-x-1">
-            <a href="#home" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200">Home</a>
-            <a href="#services" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200">Services</a>
-            <a href="#products" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200">Products</a>
-            <a href="#cost-estimator" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200">Pricing</a>
-            <a href="#contact" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200">Contact</a>
+            <a (click)="navigateTo('home', $event)" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200 cursor-pointer">Home</a>
+            <a (click)="navigateTo('services', $event)" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200 cursor-pointer">Services</a>
+            <a (click)="navigateTo('products', $event)" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200 cursor-pointer">Products</a>
+            <a (click)="navigateTo('cost-estimator', $event)" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200 cursor-pointer">Pricing</a>
+            <a (click)="navigateTo('contact', $event)" class="px-4 py-2 rounded-full text-slate-600 font-medium hover:text-kinetech-600 hover:bg-kinetech-50 transition-all duration-200 cursor-pointer">Contact</a>
           </nav>
 
           <!-- CTA / Mobile Menu Toggle -->
           <div class="flex items-center gap-4">
-            <a href="#cost-estimator" class="hidden md:inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 duration-200">
+            <a (click)="navigateTo('cost-estimator', $event)" class="hidden md:inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 duration-200 cursor-pointer">
               Get Started
             </a>
             
@@ -51,12 +52,12 @@ import { CommonModule } from '@angular/common';
       @if (isOpen()) {
         <div class="md:hidden fixed inset-0 z-40 bg-white pt-24 px-4 animate-fade-in-up">
            <nav class="flex flex-col space-y-4 text-center">
-             <a href="#home" (click)="closeMenu()" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100">Home</a>
-             <a href="#services" (click)="closeMenu()" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100">Services</a>
-             <a href="#products" (click)="closeMenu()" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100">Products</a>
-             <a href="#cost-estimator" (click)="closeMenu()" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100">Pricing</a>
-             <a href="#contact" (click)="closeMenu()" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100">Contact</a>
-             <a href="#cost-estimator" (click)="closeMenu()" class="mt-4 inline-flex items-center justify-center px-8 py-3 border border-transparent text-lg font-bold rounded-xl text-white bg-slate-900 shadow-lg active:scale-95 transition-transform">
+             <a (click)="navigateTo('home', $event)" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100 cursor-pointer">Home</a>
+             <a (click)="navigateTo('services', $event)" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100 cursor-pointer">Services</a>
+             <a (click)="navigateTo('products', $event)" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100 cursor-pointer">Products</a>
+             <a (click)="navigateTo('cost-estimator', $event)" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100 cursor-pointer">Pricing</a>
+             <a (click)="navigateTo('contact', $event)" class="text-xl font-medium text-slate-900 py-3 border-b border-slate-100 cursor-pointer">Contact</a>
+             <a (click)="navigateTo('cost-estimator', $event)" class="mt-4 inline-flex items-center justify-center px-8 py-3 border border-transparent text-lg font-bold rounded-xl text-white bg-slate-900 shadow-lg active:scale-95 transition-transform cursor-pointer">
                Get Started
              </a>
            </nav>
@@ -66,6 +67,7 @@ import { CommonModule } from '@angular/common';
   `
 })
 export class HeaderComponent {
+  private scrollService = inject(ScrollService);
   isOpen = signal(false);
 
   toggleMenu() {
@@ -74,5 +76,13 @@ export class HeaderComponent {
 
   closeMenu() {
     this.isOpen.set(false);
+  }
+
+  navigateTo(section: string, event?: Event) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.closeMenu();
+    this.scrollService.scrollToSection(section);
   }
 }

@@ -9,7 +9,17 @@ export class AiService {
   private chatSession: Chat | null = null;
 
   constructor() {
-    this.ai = new GoogleGenAI({ apiKey: process.env['API_KEY'] });
+    // Try to get API key from environment or use a placeholder
+    // In browser environment, you'll need to set this via window or environment config
+    const apiKey = (typeof window !== 'undefined' && (window as any).GEMINI_API_KEY) || 
+                   (typeof process !== 'undefined' && process.env?.['GEMINI_API_KEY']) ||
+                   '';
+    
+    if (!apiKey) {
+      console.warn('GEMINI_API_KEY not found. Chat functionality will be limited.');
+    }
+    
+    this.ai = new GoogleGenAI({ apiKey });
   }
 
   async sendMessage(message: string): Promise<string> {

@@ -1,0 +1,152 @@
+---
+import { scrollToSection } from '../utils/scroll';
+---
+
+<section id="products" class="scroll-mt-28 py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+      <div class="max-w-3xl">
+        <span class="text-kinetech-600 font-semibold tracking-wide uppercase text-sm">AI-Powered Ecosystem</span>
+        <h2 class="font-display text-4xl font-bold text-slate-900 sm:text-5xl mt-2">Kinetech Solutions</h2>
+        <p class="mt-6 text-xl text-slate-600">
+          We infuse every product with advanced AI to drive innovation. From global communication to intelligent hiring, our tools adapt to your business case.
+        </p>
+      </div>
+      <a 
+        onclick="scrollToSection('contact'); return false;" 
+        class="hidden md:inline-flex items-center font-bold text-kinetech-600 hover:text-kinetech-800 transition group mt-6 md:mt-0 cursor-pointer"
+      >
+        View full catalog 
+        <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+      
+      <!-- Product 1: Global AI Dialer (Flagship) -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-kinetech-500/10 transition-all duration-500 border border-slate-100 flex flex-col group h-full relative">
+        <!-- Glowing effect for primary product -->
+        <div class="absolute inset-0 bg-gradient-to-r from-kinetech-500/5 to-purple-500/5 pointer-events-none"></div>
+        
+        <div class="h-72 overflow-hidden relative">
+          <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+          <img src="https://picsum.photos/seed/globalai/800/600" alt="Global AI Dialer" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute top-6 left-6 z-20 flex gap-2">
+            <span class="bg-kinetech-600/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider shadow-sm">Flagship</span>
+            <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-slate-900 uppercase tracking-wider shadow-sm">Communication</span>
+          </div>
+        </div>
+        <div class="p-8 md:p-10 flex-1 flex flex-col relative z-20">
+          <div class="flex justify-between items-start mb-4">
+             <h3 class="text-2xl font-display font-bold text-slate-900">Global AI Dialer</h3>
+          </div>
+          <p class="text-slate-600 mb-8 flex-1 leading-relaxed">
+            Experience the most intense, capable conversational AI available globally. Engineered for high-stakes environments, it handles complex dialogues with unmatched speed and human-like nuance to revolutionize your customer interactions.
+          </p>
+          <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
+             <button 
+               onclick="scrollToSection('contact'); return false;" 
+               class="text-slate-900 font-bold hover:text-kinetech-600 transition-colors flex items-center cursor-pointer"
+             >
+               Explore Capabilities
+               <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2: E-Voting Platform -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 border border-slate-100 flex flex-col group h-full">
+        <div class="h-72 overflow-hidden relative">
+          <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+          <img src="https://picsum.photos/seed/evoting/800/600" alt="E-Voting Platform" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute top-6 left-6 z-20">
+            <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-slate-900 uppercase tracking-wider shadow-sm">Secure Platform</span>
+          </div>
+        </div>
+        <div class="p-8 md:p-10 flex-1 flex flex-col">
+           <div class="flex justify-between items-start mb-4">
+             <h3 class="text-2xl font-display font-bold text-slate-900">Kinetech E-Voting</h3>
+          </div>
+          <p class="text-slate-600 mb-8 flex-1 leading-relaxed">
+            Secure, democratized decision making. Whether you are a small team or a large organization, schedule and manage encrypted voting sessions tailored to your specific use cases with complete transparency.
+          </p>
+          <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
+             <button 
+               onclick="scrollToSection('contact'); return false;" 
+               class="text-slate-900 font-bold hover:text-indigo-600 transition-colors flex items-center cursor-pointer"
+             >
+               Learn More
+               <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3: SEO Tool -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500 border border-slate-100 flex flex-col group h-full">
+        <div class="h-72 overflow-hidden relative">
+          <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+          <img src="https://picsum.photos/seed/seotool/800/600" alt="SEO Tool" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute top-6 left-6 z-20">
+            <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-slate-900 uppercase tracking-wider shadow-sm">Growth Engine</span>
+          </div>
+        </div>
+        <div class="p-8 md:p-10 flex-1 flex flex-col">
+          <div class="flex justify-between items-start mb-4">
+             <h3 class="text-2xl font-display font-bold text-slate-900">Real-Time SEO Core</h3>
+          </div>
+          <p class="text-slate-600 mb-8 flex-1 leading-relaxed">
+            Accelerate organic growth with real-time analytics. Our tool generates high-impact keywords and optimization strategies instantly to enhance the marketing of your site or product.
+          </p>
+          <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
+             <button 
+               onclick="scrollToSection('contact'); return false;" 
+               class="text-slate-900 font-bold hover:text-purple-600 transition-colors flex items-center cursor-pointer"
+             >
+               Learn More
+               <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+             </button>
+          </div>
+        </div>
+      </div>
+
+       <!-- Product 4: Hiring & Assessment Platform -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 border border-slate-100 flex flex-col group h-full">
+        <div class="h-72 overflow-hidden relative">
+          <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+          <img src="https://picsum.photos/seed/hiring/800/600" alt="Hiring Assessment Platform" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute top-6 left-6 z-20">
+            <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-slate-900 uppercase tracking-wider shadow-sm">HR Tech</span>
+          </div>
+        </div>
+        <div class="p-8 md:p-10 flex-1 flex flex-col">
+          <div class="flex justify-between items-start mb-4">
+             <h3 class="text-2xl font-display font-bold text-slate-900">Talent Assessment Suite</h3>
+             <div class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded uppercase">New</div>
+          </div>
+          <p class="text-slate-600 mb-8 flex-1 leading-relaxed">
+            Streamline recruitment with AI-driven testing. Automated grading and proctoring for startups and enterprises to identify top talent faster.
+          </p>
+          <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
+             <button 
+               onclick="scrollToSection('contact'); return false;" 
+               class="text-slate-900 font-bold hover:text-emerald-600 transition-colors flex items-center cursor-pointer"
+             >
+               Learn More
+               <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+             </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { scrollToSection } from '../utils/scroll';
+  (window as any).scrollToSection = scrollToSection;
+</script>

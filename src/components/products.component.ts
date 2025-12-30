@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ import { Component } from '@angular/core';
               We infuse every product with advanced AI to drive innovation. From global communication to intelligent hiring, our tools adapt to your business case.
             </p>
           </div>
-          <a href="#contact" class="hidden md:inline-flex items-center font-bold text-kinetech-600 hover:text-kinetech-800 transition group mt-6 md:mt-0">
+          <a (click)="navigateTo('contact')" class="hidden md:inline-flex items-center font-bold text-kinetech-600 hover:text-kinetech-800 transition group mt-6 md:mt-0 cursor-pointer">
             View full catalog 
             <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -45,7 +46,7 @@ import { Component } from '@angular/core';
                 Experience the most intense, capable conversational AI available globally. Engineered for high-stakes environments, it handles complex dialogues with unmatched speed and human-like nuance to revolutionize your customer interactions.
               </p>
               <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
-                 <button class="text-slate-900 font-bold hover:text-kinetech-600 transition-colors flex items-center">
+                 <button (click)="navigateTo('contact')" class="text-slate-900 font-bold hover:text-kinetech-600 transition-colors flex items-center cursor-pointer">
                    Explore Capabilities
                    <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                  </button>
@@ -70,7 +71,7 @@ import { Component } from '@angular/core';
                 Secure, democratized decision making. Whether you are a small team or a large organization, schedule and manage encrypted voting sessions tailored to your specific use cases with complete transparency.
               </p>
               <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
-                 <button class="text-slate-900 font-bold hover:text-indigo-600 transition-colors flex items-center">
+                 <button (click)="navigateTo('contact')" class="text-slate-900 font-bold hover:text-indigo-600 transition-colors flex items-center cursor-pointer">
                    Learn More
                    <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                  </button>
@@ -95,7 +96,7 @@ import { Component } from '@angular/core';
                 Accelerate organic growth with real-time analytics. Our tool generates high-impact keywords and optimization strategies instantly to enhance the marketing of your site or product.
               </p>
               <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
-                 <button class="text-slate-900 font-bold hover:text-purple-600 transition-colors flex items-center">
+                 <button (click)="navigateTo('contact')" class="text-slate-900 font-bold hover:text-purple-600 transition-colors flex items-center cursor-pointer">
                    Learn More
                    <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                  </button>
@@ -121,7 +122,7 @@ import { Component } from '@angular/core';
                 Streamline recruitment with AI-driven testing. Automated grading and proctoring for startups and enterprises to identify top talent faster.
               </p>
               <div class="flex items-center justify-between mt-auto pt-6 border-t border-slate-100">
-                 <button class="text-slate-900 font-bold hover:text-emerald-600 transition-colors flex items-center">
+                 <button (click)="navigateTo('contact')" class="text-slate-900 font-bold hover:text-emerald-600 transition-colors flex items-center cursor-pointer">
                    Learn More
                    <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                  </button>
@@ -134,4 +135,10 @@ import { Component } from '@angular/core';
     </section>
   `
 })
-export class ProductsComponent {}
+export class ProductsComponent {
+  private scrollService = inject(ScrollService);
+
+  navigateTo(section: string) {
+    this.scrollService.scrollToSection(section);
+  }
+}

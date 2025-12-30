@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-contact',
@@ -54,7 +55,7 @@ import { CommonModule } from '@angular/common';
                 </div>
                 <h3 class="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
                 <p class="text-slate-600 max-w-xs mx-auto mb-8">Thank you for contacting Kinetech. One of our specialists will be in touch shortly.</p>
-                <button (click)="resetForm()" class="text-kinetech-600 font-bold hover:text-kinetech-800 hover:underline">Send another message</button>
+                <button (click)="resetForm()" class="text-kinetech-600 font-bold hover:text-kinetech-800 hover:underline cursor-pointer">Send another message</button>
               </div>
             } @else {
               <form (ngSubmit)="onSubmit()" class="space-y-6">
@@ -83,7 +84,7 @@ import { CommonModule } from '@angular/common';
                   <textarea id="message" name="message" rows="4" [(ngModel)]="formData.message" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none transition-all shadow-sm group-hover:border-slate-300" placeholder="Tell us about your project..."></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-kinetech-600 transition-all duration-200 shadow-lg hover:shadow-kinetech-500/30 active:scale-95 transform hover:-translate-y-1">
+                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-kinetech-600 transition-all duration-200 shadow-lg hover:shadow-kinetech-500/30 active:scale-95 transform hover:-translate-y-1 cursor-pointer">
                   Send Message
                 </button>
               </form>
@@ -95,6 +96,8 @@ import { CommonModule } from '@angular/common';
   `
 })
 export class ContactComponent {
+  private scrollService = inject(ScrollService);
+  
   submitted = signal(false);
   formData = {
     name: '',
@@ -107,6 +110,10 @@ export class ContactComponent {
     // In a real app, this would send data to backend
     setTimeout(() => {
       this.submitted.set(true);
+      // Scroll to top of contact section to show success message
+      setTimeout(() => {
+        this.scrollService.scrollToSection('contact');
+      }, 100);
     }, 800);
   }
 

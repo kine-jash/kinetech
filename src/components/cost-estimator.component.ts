@@ -1,6 +1,7 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ScrollService } from '../services/scroll.service';
 
 @Component({
   selector: 'app-cost-estimator',
@@ -130,7 +131,7 @@ import { FormsModule } from '@angular/forms';
                 <div class="flex justify-end">
                    <p class="text-xs text-slate-500">*Estimated base price. Final quote may vary.</p>
                 </div>
-                <button class="mt-6 w-full py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-kinetech-50 transition-all duration-200 shadow-lg shadow-white/10 active:scale-95">
+                <button (click)="requestQuote()" class="mt-6 w-full py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-kinetech-50 transition-all duration-200 shadow-lg shadow-white/10 active:scale-95 cursor-pointer">
                   Request Detailed Quote
                 </button>
               </div>
@@ -160,4 +161,11 @@ export class CostEstimatorComponent {
   formattedTotal = computed(() => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(this.total());
   });
+
+  private scrollService = inject(ScrollService);
+
+  requestQuote() {
+    // Scroll to contact section to request quote
+    this.scrollService.scrollToSection('contact');
+  }
 }

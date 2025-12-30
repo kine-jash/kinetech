@@ -1,33 +1,22 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
     "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "jsxImportSource": "astro",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
-    "allowJs": true,
-    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["astro/client"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
-  "files": [
-    "./index.tsx"
-  ],
-  "angularCompilerOptions": {
-    "disableTypeScriptVersionCheck": true
-  }
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

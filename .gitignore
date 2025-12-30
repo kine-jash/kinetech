@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Astro
+.astro
+
+# Environment variables
+.env
+.env.production
+
+# GitHub Pages - docs folder (if using docs folder method)
+# Uncomment the line below if you're using the 'docs' folder method
+# docs

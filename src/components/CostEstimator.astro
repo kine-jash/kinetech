@@ -1,0 +1,202 @@
+---
+import { scrollToSection } from '../utils/scroll';
+---
+
+<section id="cost-estimator" class="scroll-mt-28 py-24 bg-slate-900 relative overflow-hidden">
+  <!-- Ambient Glows -->
+  <div class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-kinetech-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      
+      <!-- Text Content -->
+      <div>
+        <div class="inline-block px-4 py-1.5 rounded-full border border-kinetech-500/30 bg-kinetech-500/10 text-kinetech-400 font-semibold text-sm mb-6">
+          Transparent Pricing
+        </div>
+        <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+          Build Your Site <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-kinetech-400 to-indigo-400">At Your Cost</span>
+        </h2>
+        <p class="text-slate-400 mb-8 text-lg leading-relaxed">
+          At Kinetech, we believe in complete transparency. Use our real-time estimator to see how features impact your investment. 
+          Customize your package to fit your specific needs without hidden fees.
+        </p>
+        
+        <div class="space-y-6">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-kinetech-400">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold">Modular Features</h4>
+              <p class="text-slate-400 text-sm">Pay only for what you need.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-kinetech-400">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold">AI-Ready Codebase</h4>
+              <p class="text-slate-400 text-sm">Future-proof architecture included.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estimator Tool -->
+      <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-slate-700 shadow-2xl relative group hover:border-slate-600 transition-colors">
+        <!-- Decorative gradient border effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-kinetech-500/20 to-purple-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+        
+        <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
+          <span class="w-2 h-6 bg-kinetech-500 rounded-full"></span>
+          Project Estimator
+        </h3>
+        
+        <div id="cost-estimator-app" class="space-y-8 relative z-10">
+          <!-- Slider -->
+          <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-700/50">
+            <div class="flex justify-between items-center mb-4">
+              <label class="text-sm font-medium text-slate-300">Number of Pages</label>
+              <span id="pages-display" class="text-kinetech-400 font-bold bg-kinetech-950/50 px-3 py-1 rounded-lg border border-kinetech-900">5</span>
+            </div>
+            <input 
+              type="range" 
+              id="pages-slider"
+              min="1" 
+              max="20" 
+              value="5"
+              class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-kinetech-500 hover:accent-kinetech-400 transition-all">
+            <div class="flex justify-between text-xs text-slate-500 mt-2">
+               <span>1 Page</span>
+               <span>20 Pages</span>
+            </div>
+          </div>
+
+          <!-- Toggles -->
+          <div class="space-y-3">
+            <label class="block text-sm font-medium text-slate-300 mb-2">Add-on Features</label>
+            
+            <label class="flex items-center justify-between p-4 rounded-xl bg-slate-700/30 border border-slate-700/50 cursor-pointer hover:bg-slate-700/50 hover:border-slate-600 transition-all group/item">
+              <div class="flex items-center space-x-3">
+                <div id="cms-checkbox" class="w-5 h-5 rounded-md border-2 border-slate-500 flex items-center justify-center transition-colors">
+                   <svg id="cms-check" class="w-3 h-3 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <span class="text-slate-200 group-hover/item:text-white transition-colors">Content Management (CMS)</span>
+              </div>
+              <input type="checkbox" id="cms-input" class="hidden">
+              <span class="text-sm text-slate-400">+$800</span>
+            </label>
+            
+            <label class="flex items-center justify-between p-4 rounded-xl bg-slate-700/30 border border-slate-700/50 cursor-pointer hover:bg-slate-700/50 hover:border-slate-600 transition-all group/item">
+              <div class="flex items-center space-x-3">
+                <div id="ecommerce-checkbox" class="w-5 h-5 rounded-md border-2 border-slate-500 flex items-center justify-center transition-colors">
+                   <svg id="ecommerce-check" class="w-3 h-3 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <span class="text-slate-200 group-hover/item:text-white transition-colors">E-commerce</span>
+              </div>
+               <input type="checkbox" id="ecommerce-input" class="hidden">
+               <span class="text-sm text-slate-400">+$1,500</span>
+            </label>
+
+            <label class="flex items-center justify-between p-4 rounded-xl bg-slate-700/30 border border-slate-700/50 cursor-pointer hover:bg-slate-700/50 hover:border-slate-600 transition-all group/item">
+              <div class="flex items-center space-x-3">
+                <div id="ai-checkbox" class="w-5 h-5 rounded-md border-2 border-slate-500 flex items-center justify-center transition-colors">
+                   <svg id="ai-check" class="w-3 h-3 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <span class="text-slate-200 group-hover/item:text-white transition-colors">Kinetech AI Core</span>
+              </div>
+               <input type="checkbox" id="ai-input" class="hidden">
+               <span class="text-sm text-slate-400">+$1,200</span>
+            </label>
+          </div>
+
+          <div class="pt-8 border-t border-slate-700/50">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-slate-400 font-medium">Estimated Total</span>
+              <div class="text-right">
+                <span id="total-display" class="block text-4xl font-display font-bold text-white tracking-tight">$1,250</span>
+              </div>
+            </div>
+            <div class="flex justify-end">
+               <p class="text-xs text-slate-500">*Estimated base price. Final quote may vary.</p>
+            </div>
+            <button 
+              onclick="scrollToSection('contact'); return false;" 
+              class="mt-6 w-full py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-kinetech-50 transition-all duration-200 shadow-lg shadow-white/10 active:scale-95 cursor-pointer"
+            >
+              Request Detailed Quote
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { scrollToSection } from '../utils/scroll';
+  (window as any).scrollToSection = scrollToSection;
+
+  function updateTotal() {
+    const pages = parseInt((document.getElementById('pages-slider') as HTMLInputElement)?.value || '5');
+    const hasCMS = (document.getElementById('cms-input') as HTMLInputElement)?.checked || false;
+    const hasEcommerce = (document.getElementById('ecommerce-input') as HTMLInputElement)?.checked || false;
+    const hasAI = (document.getElementById('ai-input') as HTMLInputElement)?.checked || false;
+
+    let base = 500; // Base setup fee
+    base += pages * 150; // Per page
+    if (hasCMS) base += 800;
+    if (hasEcommerce) base += 1500;
+    if (hasAI) base += 1200;
+
+    const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(base);
+    const totalDisplay = document.getElementById('total-display');
+    if (totalDisplay) {
+      totalDisplay.textContent = formatted;
+    }
+  }
+
+  function updateCheckbox(checkboxId: string, checkId: string, inputId: string) {
+    const checkbox = document.getElementById(checkboxId);
+    const check = document.getElementById(checkId);
+    const input = document.getElementById(inputId) as HTMLInputElement;
+    
+    if (checkbox && check && input) {
+      checkbox.addEventListener('click', () => {
+        input.checked = !input.checked;
+        if (input.checked) {
+          checkbox.classList.add('bg-kinetech-500', 'border-kinetech-500');
+          check.classList.remove('hidden');
+        } else {
+          checkbox.classList.remove('bg-kinetech-500', 'border-kinetech-500');
+          check.classList.add('hidden');
+        }
+        updateTotal();
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const pagesSlider = document.getElementById('pages-slider') as HTMLInputElement;
+    const pagesDisplay = document.getElementById('pages-display');
+    
+    if (pagesSlider && pagesDisplay) {
+      pagesSlider.addEventListener('input', () => {
+        pagesDisplay.textContent = pagesSlider.value;
+        updateTotal();
+      });
+    }
+
+    updateCheckbox('cms-checkbox', 'cms-check', 'cms-input');
+    updateCheckbox('ecommerce-checkbox', 'ecommerce-check', 'ecommerce-input');
+    updateCheckbox('ai-checkbox', 'ai-check', 'ai-input');
+
+    updateTotal();
+  });
+</script>
