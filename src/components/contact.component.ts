@@ -1,0 +1,122 @@
+import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-contact',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  template: `
+    <section id="contact" class="scroll-mt-28 py-24 bg-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16">
+          
+          <!-- Contact Info -->
+          <div>
+            <h2 class="font-display text-4xl font-bold text-slate-900 mb-6">Let's build something <br>extraordinary.</h2>
+            <p class="text-xl text-slate-600 mb-10 leading-relaxed">
+              Ready to modernize your infrastructure? Drop us a line. We typically respond within 24 hours.
+            </p>
+            
+            <div class="space-y-8">
+              <div class="flex items-start gap-4">
+                 <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 flex-shrink-0">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                 </div>
+                 <div>
+                   <h3 class="font-bold text-slate-900 text-lg">Email Us</h3>
+                   <p class="text-slate-600">hello@kinetech.com</p>
+                   <p class="text-slate-600">support@kinetech.com</p>
+                 </div>
+              </div>
+
+               <div class="flex items-start gap-4">
+                 <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 flex-shrink-0">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                 </div>
+                 <div>
+                   <h3 class="font-bold text-slate-900 text-lg">Visit Us</h3>
+                   <p class="text-slate-600">1200 Tech Plaza, Suite 400</p>
+                   <p class="text-slate-600">San Francisco, CA 94107</p>
+                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="bg-slate-50 rounded-3xl p-8 md:p-12 shadow-lg border border-slate-100">
+            @if (submitted()) {
+              <div class="text-center py-12 h-full flex flex-col items-center justify-center animate-fade-in-up">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                  <svg class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
+                <p class="text-slate-600 max-w-xs mx-auto mb-8">Thank you for contacting Kinetech. One of our specialists will be in touch shortly.</p>
+                <button (click)="resetForm()" class="text-kinetech-600 font-bold hover:text-kinetech-800 hover:underline">Send another message</button>
+              </div>
+            } @else {
+              <form (ngSubmit)="onSubmit()" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div class="group">
+                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1 group-focus-within:text-kinetech-600 transition-colors">Name</label>
+                    <input type="text" id="name" name="name" [(ngModel)]="formData.name" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none transition-all shadow-sm group-hover:border-slate-300" placeholder="John Doe">
+                  </div>
+                  <div class="group">
+                    <label for="email" class="block text-sm font-medium text-slate-700 mb-1 group-focus-within:text-kinetech-600 transition-colors">Email</label>
+                    <input type="email" id="email" name="email" [(ngModel)]="formData.email" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none transition-all shadow-sm group-hover:border-slate-300" placeholder="john@company.com">
+                  </div>
+                </div>
+                
+                <div class="group">
+                  <label for="subject" class="block text-sm font-medium text-slate-700 mb-1 group-focus-within:text-kinetech-600 transition-colors">Subject</label>
+                  <select id="subject" name="subject" [(ngModel)]="formData.subject" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none transition-all shadow-sm group-hover:border-slate-300">
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Quote Request">Get a Quote</option>
+                    <option value="Support">Product Support</option>
+                  </select>
+                </div>
+
+                <div class="group">
+                  <label for="message" class="block text-sm font-medium text-slate-700 mb-1 group-focus-within:text-kinetech-600 transition-colors">Message</label>
+                  <textarea id="message" name="message" rows="4" [(ngModel)]="formData.message" required class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-kinetech-500 focus:border-kinetech-500 outline-none transition-all shadow-sm group-hover:border-slate-300" placeholder="Tell us about your project..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-kinetech-600 transition-all duration-200 shadow-lg hover:shadow-kinetech-500/30 active:scale-95 transform hover:-translate-y-1">
+                  Send Message
+                </button>
+              </form>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  `
+})
+export class ContactComponent {
+  submitted = signal(false);
+  formData = {
+    name: '',
+    email: '',
+    subject: 'General Inquiry',
+    message: ''
+  };
+
+  onSubmit() {
+    // In a real app, this would send data to backend
+    setTimeout(() => {
+      this.submitted.set(true);
+    }, 800);
+  }
+
+  resetForm() {
+    this.formData = {
+      name: '',
+      email: '',
+      subject: 'General Inquiry',
+      message: ''
+    };
+    this.submitted.set(false);
+  }
+}

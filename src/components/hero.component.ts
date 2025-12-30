@@ -1,0 +1,183 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-hero',
+  standalone: true,
+  template: `
+    <div class="relative">
+      
+      <!-- Background Decorative Elements (Fixed with negative Z-index to never block clicks) -->
+      <div class="fixed inset-0 pointer-events-none z-[-1] bg-slate-50">
+        <div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
+        <!-- Blob 1 -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-kinetech-400/20 rounded-full blur-[100px] animate-pulse"></div>
+        <!-- Blob 2 -->
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-[100px] animate-pulse" style="animation-duration: 8s;"></div>
+      </div>
+
+      <!-- PAGE 1: Intro Text -->
+      <section id="home" class="scroll-mt-28 relative min-h-screen flex flex-col justify-center items-center pt-20 px-4 sm:px-6 lg:px-8 z-10">
+        
+        <div class="text-center max-w-4xl mx-auto">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-8 animate-fade-in-up">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kinetech-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-kinetech-500"></span>
+            </span>
+            <span class="text-sm font-medium text-slate-600">Reimagining Digital Solutions</span>
+          </div>
+          
+          <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-8 animate-fade-in-up leading-tight" style="animation-delay: 0.1s;">
+            Build Digital Excellence <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-kinetech-600 via-indigo-600 to-purple-600">At Your Pace</span>
+          </h1>
+          
+          <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-slate-600 mb-10 leading-relaxed animate-fade-in-up px-4" style="animation-delay: 0.2s;">
+            Kinetech bridges the gap between premium software engineering and budget flexibility. 
+            Deploy AI-integrated systems without the enterprise price tag.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up px-4" style="animation-delay: 0.3s;">
+            <a href="#cost-estimator" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-slate-900/20 duration-200">
+              Start Building
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a href="#products" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 border border-slate-200 text-lg font-semibold rounded-full text-slate-700 bg-white hover:bg-slate-50 transition-all hover:scale-105 active:scale-95 hover:border-slate-300 shadow-sm hover:shadow-lg duration-200">
+              View Solutions
+            </a>
+          </div>
+
+          <!-- Scroll Indicator -->
+          <a href="#dashboard" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:text-kinetech-600 transition-colors p-2">
+            <span class="text-slate-400 text-sm font-medium mb-2 block">Our Platform</span>
+            <svg class="w-6 h-6 text-slate-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGE 2: Dashboard Visualization -->
+      <section id="dashboard" class="scroll-mt-28 relative min-h-screen flex flex-col justify-center items-center py-24 px-4 sm:px-6 lg:px-8 z-10 bg-gradient-to-b from-transparent to-white">
+        
+        <div class="w-full max-w-6xl mx-auto">
+           <div class="text-center mb-12">
+             <h2 class="font-display text-3xl font-bold text-slate-900">Unified Intelligence Control</h2>
+             <p class="text-slate-500 mt-2">Manage all your AI tools from a single, intuitive interface.</p>
+           </div>
+
+           <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200/60 bg-white/90 backdrop-blur-md">
+              <!-- Browser Header -->
+              <div class="bg-slate-50 border-b border-slate-200 px-4 py-3 flex items-center gap-2">
+                <div class="flex gap-1.5">
+                  <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                <div class="ml-4 bg-white border border-slate-200 rounded-md px-3 py-1 text-xs text-slate-400 flex-1 max-w-xs text-center font-mono flex items-center justify-center">
+                  <svg class="w-3 h-3 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                  app.kinetech.ai/dashboard
+                </div>
+              </div>
+
+              <!-- Dashboard Body -->
+              <div class="flex h-[600px] md:h-[700px]">
+                
+                <!-- Sidebar -->
+                <div class="w-20 md:w-64 bg-slate-50 border-r border-slate-200 flex-shrink-0 flex flex-col pt-6">
+                   <div class="px-4 md:px-6 mb-8 flex items-center gap-3">
+                     <div class="w-8 h-8 rounded-lg bg-kinetech-600 flex items-center justify-center text-white font-bold">K</div>
+                     <span class="hidden md:block font-bold text-slate-800">Workspace</span>
+                   </div>
+                   
+                   <div class="space-y-1 px-3">
+                     <div class="flex items-center gap-3 px-3 py-2 bg-white border border-slate-200 rounded-lg text-kinetech-700 font-medium shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                       <span class="hidden md:block">Apps Overview</span>
+                     </div>
+                     <div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">
+                       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                       <span class="hidden md:block">Analytics</span>
+                     </div>
+                     <div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">
+                       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                       <span class="hidden md:block">Team</span>
+                     </div>
+                   </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="flex-1 p-6 md:p-8 overflow-y-auto bg-slate-50/50">
+                   <div class="flex justify-between items-center mb-6">
+                     <h3 class="text-xl font-bold text-slate-800">Your Active Products</h3>
+                     <button class="text-sm bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition shadow-sm hover:shadow active:scale-95 duration-200">Add Module</button>
+                   </div>
+
+                   <!-- Product Grid -->
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     
+                     <!-- Card 1: Dialer -->
+                     <div class="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-default">
+                       <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-4 relative">
+                          <img src="https://picsum.photos/seed/tech1/600/400" alt="AI Dialer Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                          <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur text-white text-xs px-2 py-1 rounded">Live</div>
+                       </div>
+                       <h4 class="font-bold text-slate-900">Global AI Dialer</h4>
+                       <div class="flex justify-between items-center mt-2">
+                         <span class="text-xs text-green-600 font-medium flex items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></span> 98% Connectivity</span>
+                         <span class="text-xs text-slate-400">Ver 2.4</span>
+                       </div>
+                     </div>
+
+                     <!-- Card 2: E-Voting -->
+                     <div class="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-default">
+                       <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-4 relative">
+                          <img src="https://picsum.photos/seed/tech2/600/400" alt="E-Voting Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                       </div>
+                       <h4 class="font-bold text-slate-900">Secure E-Voting</h4>
+                       <div class="flex justify-between items-center mt-2">
+                         <span class="text-xs text-blue-600 font-medium flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1"></span> Active Session</span>
+                         <span class="text-xs text-slate-400">Ver 1.1</span>
+                       </div>
+                     </div>
+
+                     <!-- Card 3: SEO -->
+                     <div class="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-default">
+                       <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-4 relative">
+                          <img src="https://picsum.photos/seed/tech3/600/400" alt="SEO Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                          <div class="absolute bottom-2 right-2 bg-purple-600/80 backdrop-blur text-white text-xs px-2 py-1 rounded">+15% Growth</div>
+                       </div>
+                       <h4 class="font-bold text-slate-900">SEO Intelligence</h4>
+                       <div class="flex justify-between items-center mt-2">
+                         <span class="text-xs text-slate-500 font-medium">Analyzing keywords...</span>
+                         <span class="text-xs text-slate-400">Ver 3.0</span>
+                       </div>
+                     </div>
+
+                     <!-- Card 4: Hiring -->
+                     <div class="group bg-white rounded-xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-default">
+                       <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-100 mb-4 relative">
+                          <img src="https://picsum.photos/seed/tech4/600/400" alt="Hiring Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                       </div>
+                       <h4 class="font-bold text-slate-900">Talent Assessment</h4>
+                       <div class="flex justify-between items-center mt-2">
+                         <span class="text-xs text-slate-500 font-medium">5 Candidates Waiting</span>
+                         <span class="text-xs text-slate-400">Ver 1.8</span>
+                       </div>
+                     </div>
+
+                   </div>
+                </div>
+
+              </div>
+           </div>
+        </div>
+
+      </section>
+
+    </div>
+  `
+})
+export class HeroComponent {}
