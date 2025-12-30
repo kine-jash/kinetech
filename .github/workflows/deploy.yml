@@ -13,6 +13,12 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,12 +26,16 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
-        # with:
-        #   path: . # The root location of your Astro project, optional. Default is `.`
-        #   node-version: 20 # The specific version of Node that should be used to build your site, optional. Default is `18`
-        #   package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site, optional. Default is `npm@latest`
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build with Astro
+        run: npm run build
       
       - name: Copy CNAME file for custom domain
         run: |
@@ -35,6 +45,19 @@ jobs:
           else
             echo "No CNAME file found, skipping"
           fi
+      
+      - name: Ensure .nojekyll file exists
+        run: |
+          touch dist/.nojekyll
+          echo "Created .nojekyll file to prevent Jekyll processing"
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
 
   deploy:
     needs: build
